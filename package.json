@@ -1,0 +1,17 @@
+{
+  "name": "brain",
+  "version": "1.0.0",
+  "description": "an interface to my elephant brain",
+  "main": "src/index.js",
+  "scripts": {
+    "custom": "NODE_PATH=./src node src/index.js",
+    "start": "npm run custom \"$(pwd)/google-auth.json\" 19AwKjQqcbyyBpm0XCVNK-3uaV0wgDUjp6VcV9RBkfPc",
+    "enc": "openssl enc -aes-256-cbc -salt -in google-auth.json -out google-auth.enc",
+    "dec": "openssl enc -aes-256-cbc -d -in google-auth.enc -out google-auth.json"
+  },
+  "author": "Jonathan Azoff <jon@azof.fr>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "google-spreadsheet": "^2.0.7"
+  }
+}
