@@ -17,6 +17,12 @@ assert.date = (msg = 'date value error') => {
 	}
 }
 
+assert.bool = (msg = 'bool value error') => {
+	return val => {
+		return Boolean(val) ? 'TRUE' : 'FALSE'
+	}
+}
+
 assert.int = (min, max, msg = 'int value error') => {
 	return val => {
 		try {
