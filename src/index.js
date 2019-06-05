@@ -1,29 +1,25 @@
 #!/usr/bin/env node
 
+const util = require('util')
 const GoogleSpreadsheet = require('google-spreadsheet')
-
-function papply(obj, method, ...args) {
-	return new Promise((resolve, reject) => {
-		args.push(function(err, data){
-			if (err) reject(err)
-			else resolve(data)
-		})
-		obj[method](...args)
-	})
-}
+const GOOGLE_CREDENTIAL_PATH = process.env.GOOGLE_CREDENTIAL_PATH || `${__dirname}/../google-auth.json`
+const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID
 
 async function authorize() {
-	const creds = require(process.argv.slice(-2)[0])
-	const sheetId = process.argv.slice(-1)[0]
-	const conn = new GoogleSpreadsheet(sheetId)
-	await papply(conn, 'useServiceAccountAuth', creds)
+	const creds = require(GOOGLE_CREDENTIAL_PATH)
+	const conn = new GoogleSpreadsheet(GOOGLE_SHEET_ID)
+	await util.promisify(conn.useServiceAccountAuth).call(conn, creds)
 	return conn
+}
+
+async function handler(conn, subcommand, args) {
+	return require(`./${subcommand}`).call(conn, conn, ...args)
 }
 
 async function main() {
 	const conn = await authorize()
-	const { worksheets } = await papply(conn, 'getInfo')
-	console.log(worksheets)
+	const [ command, ...args ] = process.argv.slice(2)
+	return handler(conn, command, args)
 }
 
-main().catch(console.error)
+main().then(console.log).catch(console.error)
