@@ -6,7 +6,8 @@ const assert = require('./assert')
 const port = parseInt(process.env.SERVER_PORT || '3000', 10)
 
 function route(app, name) {
-	app.post(`/${name}`, async (req, res) => {
+	const path = `/${name}`
+	app.post(path, async (req, res) => {
 		const { add, serializer } = require(`./${name}`)
 		const conn = await authorize()
 		try {
@@ -14,7 +15,7 @@ function route(app, name) {
 			const input = await assert.serialize(serializer, req.body)
 			const row = await add(conn, input)
 			console.log('>>>', row)
-			res.redirect(`/?row=${row.id}`)
+			res.redirect(path)
 		} catch (e) {
 			console.error(e)
 			res.status(400).send(e.message)
