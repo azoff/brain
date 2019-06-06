@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Elephant Brain | Compost</title>
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+</head>
+<body>
+	<nav><a href="/">Brain</a></nav>
+	<form method="post" action="http://brain.azof.fr/compost">
+		<fieldset>
+			<legend>required fields</legend>
+			<label for="idea">Idea</label>
+			<input type="text" id="idea" name="idea" required>
+			<label for="urgency">Urgency</label>
+			<input type="number" min="1" max="4" step="1" id="urgency" name="urgency" value="1" required>
+			<label for="value">Value</label>
+			<input type="number" min="1" max="4" step="1" id="value" name="value" value="1" required>
+		</fieldset>
+		<fieldset>
+			<legend>optional fields</legend>
+			<label for="tags">Tags</label>
+			<input type="text" id="tags" name="tags">
+		</fieldset>
+		<fieldset>
+			<button type="reset">Clear</button>
+			<button type="submit">Submit</button>
+		</fieldset>
+	</form>
+</body>
+</html>

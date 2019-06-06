@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Elephant Brain | Scores</title>
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+</head>
+<body>
+	<nav><a href="/">Brain</a></nav>
+	<form method="post" action="http://brain.azof.fr/scores">
+		<fieldset>
+			<legend>required fields</legend>
+			<label for="member">Member</label>
+			<input type="text" id="member" name="member" required>
+			<label for="score">Score</label>
+			<input type="number" min="-10" max="10" step="1" id="score" name="score" required>
+			<label for="story">Story</label>
+			<input type="text"id="story" name="story" required>
+		</fieldset>
+		<fieldset>
+			<legend>optional fields</legend>
+			<label for="communicated">Communicated</label>
+			<input type="text" id="communicated" name="communicated" value="FALSE">
+			<label for="recognized">Recognized</label>
+			<input type="text" id="recognized" name="recognized" value="FALSE">
+		</fieldset>
+		<fieldset>
+			<button type="reset">Clear</button>
+			<button type="submit">Submit</button>
+		</fieldset>
+	</form>
+</body>
+</html>

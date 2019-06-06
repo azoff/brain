@@ -1,0 +1,116 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body, html {
+	width: 100vw;
+}
+
+html {
+	height: 100vh;
+	background-color: #333;
+	font-size: 16px;
+	line-height: 1.4;
+	font-family: verdana, sans-serif;
+	color: #EEE;
+}
+
+body {
+	overflow: auto;
+}
+
+form {
+	width: 100%;
+	padding: 1rem;
+}
+
+a {
+	color: white;
+}
+
+nav a {
+	display: block;
+	border-bottom: solid 1px #555;
+	padding: 1rem;
+	text-decoration: none;
+}
+
+fieldset {
+	margin: 0 0 3rem 0;
+	border: solid 1px #555;
+	border-radius: 3px;
+}
+
+fieldset:last-child {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100vw;
+	margin: 0;
+	border-left: none 0;
+	border-right: none 0;
+	border-radius: 0;
+	padding: 0;
+}
+
+fieldset input {
+	display: block;
+	border-left: none 0;
+	border-right: none 0;
+	width: 100%;
+}
+
+fieldset input:last-child {
+	border-bottom: none 0;
+}
+
+fieldset button {
+	display: block;
+	width: 50%;
+	position: relative;
+	float: left;
+}
+
+fieldset button[type=submit] {
+	background-color: green;
+}
+
+fieldset button[type=reset] {
+	background-color: red;
+}
+
+fieldset legend {
+	font-size: smaller;
+	color: #EEE;
+	text-transform: uppercase;
+	margin: 0 1rem;
+}
+
+label {
+	margin: 1rem 1rem 0.5rem;
+	display: block;
+	font-size: smaller;
+}
+
+button {
+	border: none 0;
+	padding: 1rem;
+	line-height: 1;
+}
+
+input, button {
+	display: block;
+	-webkit-appearance: none;
+	font-size: 1rem;
+	color: white;
+	border-radius: 0;
+}
+
+input {
+	padding: 0.5rem 1rem;
+	line-height: 1.4;
+	background-color: #444;
+	border: solid 1px #555;
+}
