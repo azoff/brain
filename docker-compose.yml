@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 
 volumes:
   node_modules: {}
@@ -7,7 +7,6 @@ services:
 
   server:
     image: node:alpine
-    init: true
     working_dir: /server
     volumes:
       - ./src:/server/src:ro
