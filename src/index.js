@@ -14,7 +14,7 @@ function route(app, name) {
 			const input = await assert.serialize(serializer, req.body)
 			const row = await add(conn, input)
 			console.log('>>>', row)
-			res.redirect(req.get('referrer'))
+			res.redirect(`/?row=${row.id}`)
 		} catch (e) {
 			console.error(e)
 			res.status(400).send(e.message)
@@ -25,6 +25,7 @@ function route(app, name) {
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static('static'))
 route(app, 'tasks')
 route(app, 'scores')
 route(app, 'compost')
