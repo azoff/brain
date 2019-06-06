@@ -1,25 +1,31 @@
 #!/usr/bin/env node
 
-const util = require('util')
-const GoogleSpreadsheet = require('google-spreadsheet')
-const GOOGLE_CREDENTIAL_PATH = process.env.GOOGLE_CREDENTIAL_PATH || `${__dirname}/../google-auth.json`
-const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID
+const authorize = require('./auth')
+const express = require('express')
+const assert = require('./assert')
+const port = parseInt(process.env.SERVER_PORT || '3000', 10)
 
-async function authorize() {
-	const creds = require(GOOGLE_CREDENTIAL_PATH)
-	const conn = new GoogleSpreadsheet(GOOGLE_SHEET_ID)
-	await util.promisify(conn.useServiceAccountAuth).call(conn, creds)
-	return conn
+function route(app, name) {
+	app.post(`/${name}`, async (req, res) => {
+		const { add, serializer } = require(`./${name}`)
+		const conn = await authorize()
+		try {
+			console.log('<<<', req.body)
+			const input = await assert.serialize(serializer, req.body)
+			const row = await add(conn, input)
+			console.log('>>>', row)
+			res.redirect(req.get('referrer'))
+		} catch (e) {
+			console.error(e)
+			res.status(400).send(e.message)
+		}
+	})
 }
 
-async function handler(conn, subcommand, args) {
-	return require(`./${subcommand}`).call(conn, conn, ...args)
-}
 
-async function main() {
-	const conn = await authorize()
-	const [ command, ...args ] = process.argv.slice(2)
-	return handler(conn, command, args)
-}
-
-main().then(console.log).catch(console.error)
+const app = express()
+app.use(express.urlencoded({ extended: true }))
+route(app, 'tasks')
+route(app, 'scores')
+route(app, 'compost')
+app.listen(port, () => console.log(`server listening on ${port}...`))

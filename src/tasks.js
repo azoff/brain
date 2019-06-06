@@ -2,7 +2,14 @@ const util = require('util')
 const tabs = require('./tabs')
 const assert = require('./assert')
 
-const serializer = {
+const handler = module.exports = async function(conn, subcommand, ...args) {
+	if (subcommand === 'add') {
+		const row = await assert.serializeArgs(serializer, ...args)
+		return add(conn, row)
+	}
+}
+
+const serializer = handler.serializer = {
 	'Task': { required: true },
 	'Deadline': { assertion: assert.date() },
 	'Assignee': false,
@@ -16,15 +23,8 @@ const serializer = {
 	'Completed': { assertion: assert.date() },
 }
 
-const handler = module.exports = async function(conn, subcommand, ...args) {
-	if (subcommand === 'add') {
-		return add(conn, ...args)
-	}
-}
-
-const add = handler.add = async function(conn, ...args) {
+const add = handler.add = async function(conn, row) {
 	const tab = await tabs(conn, 'get', 'tasks')
-	const row = await assert.serializeArgs(serializer, ...args)
 	row['Priority'] = priorityFormula(tab.rowCount+1)
 	row['Status'] = statusFormula(tab.rowCount+1)
 	return await util.promisify(conn.addRow).call(conn, tab.id, row)

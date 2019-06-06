@@ -4,14 +4,15 @@
   "description": "an interface to my elephant brain",
   "main": "src/index.js",
   "scripts": {
-    "main": "node src/index.js",
-    "start": "GOOGLE_SHEET_ID=19AwKjQqcbyyBpm0XCVNK-3uaV0wgDUjp6VcV9RBkfPc npm run main",
+    "cli": "src/cli.js",
+    "start": "src/index.js",
     "enc": "openssl enc -aes-256-cbc -salt -in google-auth.json -out google-auth.enc",
     "dec": "openssl enc -aes-256-cbc -d -in google-auth.enc -out google-auth.json"
   },
   "author": "Jonathan Azoff <jon@azof.fr>",
   "license": "UNLICENSED",
   "dependencies": {
+    "express": "^4.17.1",
     "google-spreadsheet": "^2.0.7",
     "snake-case": "^2.1.0"
   }
