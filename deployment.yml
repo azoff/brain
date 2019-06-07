@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: brain-deployment
+  name: brain
   labels:
     app: brain
 spec:
@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: brain-service
+  name: brain
 spec:
   selector:
     app: brain
