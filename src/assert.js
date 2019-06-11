@@ -19,7 +19,7 @@ assert.date = (msg = 'date value error') => {
 
 assert.bool = (msg = 'bool value error') => {
 	return val => {
-		return Boolean(val) ? 'TRUE' : 'FALSE'
+		return (val && val !== 'FALSE') ? 'TRUE' : 'FALSE'
 	}
 }
 
