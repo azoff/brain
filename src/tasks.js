@@ -27,6 +27,7 @@ const add = handler.add = async function(conn, row) {
 	const tab = await tabs(conn, 'get', 'tasks')
 	row['Priority'] = priorityFormula(tab.rowCount+1)
 	row['Status'] = statusFormula(tab.rowCount+1)
+	row['Started'] = row['Started'] || startedFormula(tab.rowCount+1)
 	return await util.promisify(conn.addRow).call(conn, tab.id, row)
 }
 
@@ -34,4 +35,7 @@ const priorityFormula = row =>
 	`=AVERAGE(((365-(IF(ISDATE(B${row}),B${row}-TODAY(),365)))/365),(G${row}/4),(F${row}/4),(COUNTIF($E$2:$E,A${row})/(COUNTIF($A$2:$A,"<>")-1)))`
 
 const statusFormula = row =>
-	`=IF(A${row}="","",IF(AND(L${row}="",K${row}="",J${row}=""),"on deck",IF(AND(L${row}="",K${row}=""),"in flight",IF(AND(K${row}<>"",L${row}=""),"blocked","completed"))))`
+	`=IF(L${row}<>"","completed", IF(K${row}<>"","blocked", IF(J${row}<>"","in flight", IF(I${row}<>"","started",""))))`
+
+const startedFormula = row =>
+	`=IF(K${row}<>"",K${row},IF(L${row}<>"",L${row},""))`
