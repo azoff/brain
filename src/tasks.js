@@ -35,7 +35,7 @@ const priorityFormula = row =>
 	`=AVERAGE(((365-(IF(ISDATE(B${row}),B${row}-TODAY(),365)))/365),(G${row}/4),(F${row}/4),(COUNTIF($E$2:$E,A${row})/(COUNTIF($A$2:$A,"<>")-1)))`
 
 const statusFormula = row =>
-	`=IF(L${row}<>"","completed", IF(K${row}<>"","blocked", IF(J${row}<>"","in flight", IF(I${row}<>"","started",""))))`
+	`=IF(L${row}<>"","completed", IF(K${row}<>"","blocked", IF(J${row}<>"","in flight", IF(I${row}<>"","on deck",""))))`
 
 const startedFormula = row =>
 	`=IF(K${row}<>"",K${row},IF(L${row}<>"",L${row},""))`
