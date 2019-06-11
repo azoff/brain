@@ -16,9 +16,11 @@ spec:
     spec:
       containers:
       - name: brain
-        image: k8s.azof.fr/azoff/brain:1.0.1
+        image: k8s.azof.fr/azoff/brain:1.0.4
         ports:
         - containerPort: 3000
+      imagePullSecrets:
+      - name: dockerconfigjson
 ---
 apiVersion: v1
 kind: Service
