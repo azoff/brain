@@ -1,6 +1,6 @@
 {
   "name": "brain",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "an interface to my elephant brain",
   "main": "src/index.js",
   "scripts": {
