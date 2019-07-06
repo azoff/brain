@@ -9,7 +9,7 @@ const handler = module.exports = async function(conn, subcommand, ...args) {
 }
 
 const serializer = handler.serializer = {
-	'Recorded': { assertion: assert.date(), fallback: new Date() },
+	'Recorded': { assertion: assert.date(), fallback: () => new Date() },
 	'Idea': { required: true },
 	'Urgency': { required: true, assertion: assert.int(1,4) },
 	'Value': { required: true, assertion: assert.int(1,4) },

@@ -17,7 +17,7 @@ const serializer = handler.serializer = {
 	'Depends On': false,
 	'Urgency': { required: true, assertion: assert.int(1,4) },
 	'Value': { required: true, assertion: assert.int(1,4) },
-	'Created': { assertion: assert.date(), fallback: new Date() },
+	'Created': { assertion: assert.date(), fallback: () => new Date() },
 	'Started': { assertion: assert.date() },
 	'Blocked': { assertion: assert.date() },
 	'Completed': { assertion: assert.date() },

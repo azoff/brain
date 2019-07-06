@@ -64,7 +64,7 @@ const serialize = assert.serialize = async (serializer, obj) => {
 					aerr = e
 					value = undefined
 					if (rules.fallback) {
-						value = rules.assertion(rules.fallback)
+						value = rules.assertion(rules.fallback())
 					}
 				}
 			}
