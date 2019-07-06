@@ -1,13 +1,14 @@
 {
   "name": "brain",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "an interface to my elephant brain",
   "main": "src/index.js",
   "scripts": {
     "cli": "src/cli.js",
     "start": "src/index.js",
     "enc": "openssl enc -aes-256-cbc -salt -in google-auth.json -out google-auth.enc",
-    "dec": "openssl enc -aes-256-cbc -d -in google-auth.enc -out google-auth.json"
+    "dec": "openssl enc -aes-256-cbc -d -in google-auth.enc -out google-auth.json",
+    "build": "docker build . -t k8s.azof.fr/azoff/brain:$(git tag || echo latest)"
   },
   "author": "Jonathan Azoff <jon@azof.fr>",
   "license": "UNLICENSED",
