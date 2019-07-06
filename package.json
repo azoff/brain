@@ -8,7 +8,8 @@
     "start": "src/index.js",
     "enc": "openssl enc -aes-256-cbc -salt -in google-auth.json -out google-auth.enc",
     "dec": "openssl enc -aes-256-cbc -d -in google-auth.enc -out google-auth.json",
-    "build": "docker build . -t k8s.azof.fr/azoff/brain:$(git tag || echo latest)"
+    "version": "docker build .",
+    "postversion": "git push && git push --tags"
   },
   "author": "Jonathan Azoff <jon@azof.fr>",
   "license": "UNLICENSED",
