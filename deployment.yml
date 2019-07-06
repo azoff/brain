@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: brain
-        image: k8s.azof.fr/azoff/brain:1.0.9
+        image: k8s.azof.fr/azoff/brain:1.0.10
         ports:
         - containerPort: 3000
       imagePullSecrets:
