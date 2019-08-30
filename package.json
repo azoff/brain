@@ -6,8 +6,6 @@
   "scripts": {
     "cli": "src/cli.js",
     "start": "src/index.js",
-    "enc": "openssl enc -aes-256-cbc -salt -in google-auth.json -out google-auth.enc",
-    "dec": "openssl enc -aes-256-cbc -d -in google-auth.enc -out google-auth.json",
     "tag": "echo k8s.azof.fr/azoff/brain:$(jq -r .version package.json)",
     "build": "docker build . -t $(npm run --silent tag)",
     "predeploy": "sed -i '' \"s%image: .*%image: $(npm run --silent tag)%g\" deployment.yml && git add deployment.yml",

@@ -21,15 +21,14 @@ spec:
         - containerPort: 3000
       imagePullSecrets:
       - name: dockerconfigjson
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: brain
-spec:
-  selector:
-    app: brain
-  ports:
-  - protocol: TCP
-    port: 3000
-    targetPort: 3000
+      volumeMounts:
+        - name: google-auth-json
+          mountPath: /app/google-auth.json
+          subPath: google-auth.json
+      volumes:
+      - name: google-auth-json
+        secret:
+          secretName: brain
+          items:
+          - key: google-auth-json
+            path: google-auth.json
