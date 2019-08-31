@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+
+  deployment:
+    init: true
+    image: azoff/brain
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src:ro
+      - ./static:/app/static:ro
+      - ./package.json:/app/package.json:ro
+      - ./package-lock.json:/app/package-lock.json:ro
+

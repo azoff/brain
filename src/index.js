@@ -8,17 +8,17 @@ const port = parseInt(process.env.SERVER_PORT || '3000', 10)
 function route(app, name) {
 	const path = `/${name}`
 	app.post(path, async (req, res) => {
-		const { add, serializer } = require(`./${name}`)
-		const conn = await authorize()
+		console.log('<<<', req.body)
 		try {
-			console.log('<<<', req.body)
+			const { add, serializer } = require(`./${name}`)
+			const conn = await authorize()
 			const input = await assert.serialize(serializer, req.body)
 			const row = await add(conn, input)
 			console.log('>>>', row)
 			res.redirect(path)
 		} catch (e) {
-			console.error(e)
-			res.status(400).send(e.message)
+			console.error('!!!', e)
+			res.status(500).send(e.message)
 		}
 	})
 }
