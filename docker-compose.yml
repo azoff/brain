@@ -2,10 +2,18 @@ version: "3.7"
 
 services:
 
+  secrets:
+    image: azoff/mount-k8s-secrets:1.0.0
+    command: brain google-auth.json
+    volumes:
+      - secrets:/run/secrets
+
   deployment:
     init: true
     image: azoff/brain
     build: .
+    environment:
+      - GOOGLE_CREDENTIAL_PATH=/run/secrets/brain/google-auth.json
     ports:
       - "3000:3000"
     volumes:
@@ -13,4 +21,7 @@ services:
       - ./static:/app/static:ro
       - ./package.json:/app/package.json:ro
       - ./package-lock.json:/app/package-lock.json:ro
+      - secrets:/run/secrets
 
+volumes:
+  secrets:

@@ -1,6 +1,6 @@
 const util = require('util')
 const GoogleSpreadsheet = require('google-spreadsheet')
-const GOOGLE_CREDENTIAL_PATH = process.env.GOOGLE_CREDENTIAL_PATH || `${__dirname}/../google-auth.json`
+const GOOGLE_CREDENTIAL_PATH = process.env.GOOGLE_CREDENTIAL_PATH || "google-auth.json"
 const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID
 
 module.exports = async function() {

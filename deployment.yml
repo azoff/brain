@@ -16,12 +16,15 @@ spec:
     spec:
       containers:
       - name: brain
-        image: k8s.azof.fr/azoff/brain:1.1.4
+        image: k8s.azof.fr/azoff/brain:1.2.0
+        env:
+          - name: GOOGLE_CREDENTIAL_PATH
+            value: /run/secrets/brain/google-auth.json
         ports:
         - containerPort: 3000
         volumeMounts:
           - name: google-auth-json
-            mountPath: /app/google-auth.json
+            mountPath: /run/secrets/brain/google-auth.json
             subPath: google-auth.json
       imagePullSecrets:
       - name: dockerconfigjson
@@ -30,5 +33,5 @@ spec:
         secret:
           secretName: brain
           items:
-          - key: google-auth-json
+          - key: google-auth.json
             path: google-auth.json
